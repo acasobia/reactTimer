@@ -1,31 +1,29 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import {Constants} from 'expo';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducer from './reducer';
 import Timer from './components/Timer';
 
+let store = createStore(reducer);
+
+console.log(store.getState());
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}> 
+      <Provider store={store}>
         <Timer />
-      </View>
+      </Provider> 
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container : {
     flex: 1,
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+    backgroundColor: '#fff',
+    alignItems: "center",
+    justifyContent: 'center'
+  }
 });
